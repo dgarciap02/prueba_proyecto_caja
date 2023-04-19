@@ -1,0 +1,299 @@
+{
+"cajaA": {
+        "model": "cajaA",
+        "cycle_time": 5,
+        "views_sequence": 
+                [["frontal"],
+                ["cenital"]],
+        "results": ["KO", "OK"],
+        "bias": "KO",
+        "views": {
+            "frontal":{
+                "name": "frontal",
+                "src": "http://camera-frontal:5000"
+            },
+            "cenital":{
+                "name": "cenital",
+                "src": "http://camera-cenital:7000"
+            }
+        },
+        "rois": {
+            "etiqueta_1": {
+                "name": "etiqueta_1'",
+                "view": "frontal",
+                "threshold": 0.50,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": true
+            },
+            "etiqueta_2": {
+                "name": "etiqueta_2'",
+                "view": "frontal",
+                "threshold": 0.50,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": true
+            },
+            "A": {
+                "name": "A",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "B": {
+                "name": "B",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "C": {
+                "name": "C",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "D": {
+                "name": "D",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "E": {
+                "name": "E",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "F": {
+                "name": "F",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "G": {
+                "name": "G",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "H": {
+                "name": "H",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "OK",
+                "toclassify": false,
+                "views": ["frontal"]
+            }
+        },
+        "parts": {
+            "etiqueta":[
+                "etiqueta_1", "etiqueta_2"
+            ]
+        },
+        "anomalies": {
+            "etiqueta_borrosa": {
+                "name": "etiqueta_borrosa",
+                "view": "cenital",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["cenital"]
+            },
+            "etiqueta_rota": {
+                "name": "etiqueta_rota",
+                "view": "cenital",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["cenital"]
+            },
+            "I": {
+                "name": "I",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "J": {
+                "name": "J",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "K": {
+                "name": "K",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "L": {
+                "name": "L",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "M": {
+                "name": "M",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "N": {
+                "name": "N",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "O": {
+                "name": "O",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "P": {
+                "name": "P",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "Q": {
+                "name": "Q",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "R": {
+                "name": "R",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "S": {
+                "name": "S",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "T": {
+                "name": "T",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "U": {
+                "name": "U",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "V": {
+                "name": "V",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "W": {
+                "name": "W",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "X": {
+                "name": "X",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "Y": {
+                "name": "Y",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            },
+            "Z": {
+                "name": "Z",
+                "view": "frontal",
+                "threshold": 0.3,
+                "ignore": false,
+                "bias": "KO",
+                "toclassify": false,
+                "views": ["frontal"]
+            }
+        }  
+    }
+}
+ 

@@ -1,0 +1,146 @@
+version: '2.3'
+
+services:
+  main:
+    build:
+      context: .
+    healthcheck:
+      disable: true
+    restart: unless-stopped
+    stdin_open: true
+    env_file: 
+      - .env
+    environment:
+      - LOGLEVEL=DEBUG
+      - PYTHONUNBUFFERED=0
+      - DISPLAY=unix$DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - PLC_CONNECTION_TYPE=simulated
+    volumes:
+      - /tmp/.X11-unix/:/tmp/.X11-unix
+      - ./cfgs/:/cfgs/ # Element cfg (model) and PLC cfg.
+      - ./src/:/src/ # main source code.
+      - ./logs/:/logs/ # logs.
+      - /dev/bus/usb:/dev/bus/usb
+      - ./files/:/files/
+    privileged: true
+    entrypoint: [ "python", "-u", "/src/main.py"]
+
+  camera-frontal:
+    image: siali/camera-container-2:x86_64-images-latest #JUST FOR DEBUG (imgs in ./files/)
+    volumes:  
+      - ./files/imgs/302/frontal/:/app/files
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    entrypoint: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000", "--debug"]
+
+  camera-cenital:
+    image: siali/camera-container-2:x86_64-images-latest #JUST FOR DEBUG (imgs in ./files/)
+    volumes:  
+      - ./files/imgs/302/cenital/:/app/files
+    ports:
+      - "7000:7000"
+    restart: unless-stopped
+    entrypoint: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7000", "--debug"]
+  
+  camera-trasera:
+    image: siali/camera-container-2:x86_64-images-latest #JUST FOR DEBUG (imgs in ./files/)
+    volumes:  
+      - ./files/imgs/302/trasera/:/app/files
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
+    entrypoint: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9000", "--debug"]
+
+  api-yolo-rois:
+    image: siali/yolov5_inference_api:x86_64_9
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+              - gpu
+    ports:
+    - "5001:5001"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://api-yolo-rois:5001/healthcheck"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - "./weights/:/weights/"
+    environment: 
+      # Not supported in Jetson
+      - PYTORCH_VRAM_LIMIT=0.7 
+    stdin_open: true
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5001", "--debug"]
+    
+  api-yolo-defectos:
+    image: siali/yolov5_inference_api:x86_64_9
+    # image: siali/yolov5_inference_api
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+              - gpu
+    ports:
+    - "5002:5001"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://api-yolo-defectos:5002/healthcheck"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - "./weights/:/weights/"
+    environment: 
+      # Not supported in Jetson
+      - PYTORCH_VRAM_LIMIT=0.8 
+    stdin_open: true
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5001", "--debug"]
+
+  postgres:
+    image: postgres
+    logging:
+      driver: none
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: siali
+      POSTGRES_DB: element
+    volumes:
+      - previewer_postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -d element"]
+        interval: 10s
+        timeout: 10s
+        retries: 30
+    restart: unless-stopped
+  
+  django:
+    image: siali/ecrimesa-cilindros-interface:2.0.39
+    ports:
+      - 8000:8000
+    volumes: 
+      - ~/.git-credentials/:/etc/git-credentials
+      - ./files/imgs/:/app/media/
+    environment:
+      - INSTALL_MODULES=true
+      - SAMPLE=false
+      - LOG_LEVEL=error #option: debug ,info, warning, error and critical (django and gunicorn)
+      - RUN_MODE=0 # 0 (runserver), 1 (gunicorn)
+      - INDEX_REDIRECT=/previewer/
+    depends_on: 
+      postgres:
+        condition: service_healthy
+    command: sh -c "./run.sh"
+    restart: unless-stopped
+    
+volumes:
+    previewer_postgres:

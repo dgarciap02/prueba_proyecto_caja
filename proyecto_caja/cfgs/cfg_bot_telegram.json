@@ -1,0 +1,6 @@
+{
+    "device_name": "acciona_obra",
+    "ip_server": "10.144.118.94:2000",
+    "ip_host": "192.169.0.1",
+    "heartbeat": 20
+}

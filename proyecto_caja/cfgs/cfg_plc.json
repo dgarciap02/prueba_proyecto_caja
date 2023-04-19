@@ -1,0 +1,88 @@
+{
+    "tiempo_heartbeat": 2,
+
+    "signals": {
+        "busy": {
+            "port": null,
+            "area": "database",
+            "ignore": "False"
+        },
+        "trigger": {
+            "port": 0.0,
+            "area": "database",
+            "ignore": "False"
+        },
+        "heartbeat": {
+            "port": 0.1,
+            "area": "database",
+            "ignore": "False"
+        },
+        "ok_general": {
+            "port": 0.2,
+            "area": "database",
+            "ignore": "False"
+        },
+        "ko_general": {
+            "port": 0.3,
+            "area": "database",
+            "ignore": "False"
+        },
+        "ref_lectura_cajaA": {
+            "port": 4.3,
+            "area": "database",
+            "ignore": "False"
+        },
+        "etiqueta": {
+            "port": 5.0,
+            "area": "database",
+            "ignore": "False",
+            "items": ["etiqueta_1", "etiqueta_2"]
+        }
+    },
+
+    "profinet": {
+
+        "profinet_config": {
+            "IP": "192.168.100.100",
+            "RACK": 0,
+            "SLOT": 2
+        },
+
+        "database": {
+            "pos": 116
+        }
+    },
+
+    "arduino": {
+
+        "arduino_port": "/dev/ttyACM0",
+        "arduino_channel": 9600,
+        "arduino_outputs": {
+            "0.0": 13,
+            "0.1": 11,
+            "0.2": 10,
+            "0.3": 9,
+            "0.4": 6,
+            "0.5": 5,
+            "0.6": 3,
+            "0.7": 7
+        },
+
+        "arduino_inputs": {
+            "0.0": 2,
+            "0.1": 12,
+            "0.2": 4,
+            "0.3": 8,
+            "0.4": 23,
+            "0.5": 22,
+            "0.6": 21,
+            "0.7": 20
+        }
+
+    },
+
+    "simulated": {
+        "trigger": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+        "ref_lectura_cajaA": [4.3, 0]
+    }
+}
